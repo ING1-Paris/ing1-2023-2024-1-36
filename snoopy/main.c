@@ -42,7 +42,7 @@ int main() {
     }
     affichage();
 
-printf("quelle est la direction ekeh ?\n");
+printf("quelle est la direction?\n");
 scanf("%d", direction);
     switch (direction) {
         case 'Q':
