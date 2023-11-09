@@ -6,7 +6,7 @@ char matrice[ligne][colonne];
 int x = 2 , y = 2;
 char direction;
 char noopy = 'S';
-int j
+int j;
 void affichage()
 {
     for (int i = 0; i < ligne; i++) {
@@ -42,7 +42,7 @@ int main() {
     }
     affichage();
 
-printf("quelle est la direction desiree ?\n");
+printf("quelle est la direction ekeh ?\n");
 scanf("%d", direction);
     switch (direction) {
         case 'Q':
