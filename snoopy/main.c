@@ -2,6 +2,8 @@
 #define ligne 10
 #define colonne 20
 
+//Test
+
 char matrice[ligne][colonne];
 int x = 2 , y = 2;
 char direction;
