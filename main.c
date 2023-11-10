@@ -4,6 +4,7 @@
 struct profil {
     char identifiant[100];
     char MDP[100];
+    char pseudo[100];
 };
 
 // La fonction Configuration doit retourner un struct profil
@@ -34,7 +35,7 @@ int connexion(struct profil profil) {
     }
 }
 
-int application() {
+int main() {
     struct profil profil1;
     profil1 = Configuration(); // Utilise la fonction Configuration pour obtenir les informations de profil
     connexion(profil1);
