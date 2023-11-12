@@ -67,7 +67,7 @@ int Menu(void) {
             JEU(matrice);
             break;
         case 3:
-            chargerPartie();
+            chargerPartie(;
             break;
         case 4:
             joueur = motDePasse();
