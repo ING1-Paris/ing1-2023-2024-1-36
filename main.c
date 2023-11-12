@@ -34,6 +34,8 @@ int main() {
 // Fonction pour afficher le menu et gérer les choix
 int Menu(void) {
     int choix;
+    int retour;
+    char matrice[ligne][colonne];
     struct profil joueur;
     printf("***********************************************\n");
     printf("****************** SNOOPY GAME ****************\n");
@@ -51,7 +53,6 @@ int Menu(void) {
 
     switch (choix) {
         case 1:
-            int retour;
             reglesDuJeu();
             printf("retour : 1");
             scanf("%d", &retour);
@@ -229,7 +230,7 @@ int JEU(char matrice[ligne][colonne]) {
                     printf("Le mouvement n'est pas possible\n");
                     affichage(matrice);
                 }
-                //déplacement permis si aucune autre condition n'est validé
+                    //déplacement permis si aucune autre condition n'est validé
                 else {
                     printf("le mouvement est vers le haut\n");
                     //effacement de la position antèrieur
@@ -306,4 +307,3 @@ int JEU(char matrice[ligne][colonne]) {
     }while(touche != 'e');
     return 0;
 }
-
