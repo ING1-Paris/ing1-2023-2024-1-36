@@ -12,7 +12,6 @@ struct profil {
     char pseudo[100];
 };
 
-// Function Prototypes
 int INFOPARTIE(struct profil);
 void reglesDuJeu(void);
 void nouveauJeu(struct profil);
@@ -62,18 +61,19 @@ int Menu(void) {
             break;
         case 2:
             nouveauJeu(joueur);
-            INFOPARTIE(joueur);
-            affichage(matrice);
-            JEU(matrice);
             break;
         case 3:
-            chargerPartie(;
+            chargerPartie();
             break;
         case 4:
             joueur = motDePasse();
             Menu();
             break;
         case 5:
+             printf("retour : 1");
+            scanf("%d", &retour);
+            if (retour == 1) {
+                Menu();
             break;
         case 6:
             printf("Au revoir !\n");
@@ -88,20 +88,23 @@ int Menu(void) {
 
 // Fonction pour afficher les règles du jeu
 void reglesDuJeu(void) {
-    printf("Le but de Snoopy est de récupérer 4 oiseaux aux 4 coins du niveau en un temps imparti. Le problème\n"
-           "est que ces 4 oiseaux ne sont pas si faciles à récupérer. Une balle rebondit constamment dans le niveau\n"
-           "afin de freiner Snoopy dans sa quête. Mais ce n'est pas tout, d'autres pièges sont présents comme des\n"
-           "téléporteurs que la balle peut emprunter ou des cases piégées, voir même des blocs à pousser ou à\n"
+    printf("Le but de Snoopy est de recuperer 4 oiseaux aux 4 coins du niveau en un temps imparti. Le probleme\n"
+           "est que ces 4 oiseaux ne sont pas si faciles à recuperer. Une balle rebondit constamment dans le niveau\n"
+           "afin de freiner Snoopy dans sa quête. Mais ce n'est pas tout, d'autres pieges sont présents comme des\n"
+           "téléporteurs que la balle peut emprunter ou des cases piégees, voir même des blocs à pousser ou à\n"
            "casser...\n");
 }
 
 // Fonction pour commencer un nouveau jeu
 void nouveauJeu(struct profil joueur) {
+    char matrice[ligne][colonne];
     // Appel de la fonction de connexion avec le profil du joueur
     int authentification = connexion(joueur);
 
     if (authentification) {
-        printf("authentification réussie\n");
+        printf("authentification reussie\n");
+        affichage(matrice);
+        JEU(matrice);
     } else {
         printf("Identifiant ou mot de passe incorrect\n");
     }
@@ -119,8 +122,8 @@ int connexion(struct profil joueur) {
         printf("Mot de passe : ");
         scanf("%s", MDPDeCo);
 
-        if (strcmp(identifiantDeCo, joueur.identifiant) != 0 && strcmp(MDPDeCo, joueur.MDP) != 0) {
-            printf("Identifiant ou mot de passe incorrect\n");
+        if (strcmp(identifiantDeCo, joueur.identifiant) == 0 && strcmp(MDPDeCo, joueur.MDP) == 0) {
+            authentificationReussie=0;
         } else {
             authentificationReussie = 1;
         }
@@ -143,12 +146,10 @@ struct profil motDePasse(void) {
 
 // Fonction pour charger une partie
 void chargerPartie(void) {
-    // TODO: Implémenter la fonction pour charger une partie
 }
 
 // Fonction pour afficher les scores
 int scores(void) {
-    // TODO: Implementer la fonction pour afficher les scores
     return 0;
 }
 
@@ -156,7 +157,7 @@ int INFOPARTIE(struct profil joueur) {
     int Tempsfin;
     int A;
     int score;
-    printf("Authentification réussie\n\n");
+    printf("Authentification reussie\n\n");
     system("cls");
     printf("NIVEAU 1\n");
     printf("%s", joueur.pseudo);
@@ -164,7 +165,6 @@ int INFOPARTIE(struct profil joueur) {
         system("cls");
         printf("TIMER : %d", A);
         sleep(1);
-        // cwait;  // Commented out since it's not a standard function
     }
     Tempsfin = A;
     score = Tempsfin * 100;
@@ -196,6 +196,7 @@ int JEU(char matrice[ligne][colonne]) {
     int largeurRectangle = 20;
     int ligneDebut = 0;
     int colonneDebut = 0;
+    struct profil(joueur);
 
     for (int i = ligneDebut; i < ligneDebut + hauteurRectangle; i++) {
         for (int j = colonneDebut; j < colonneDebut + largeurRectangle; j++) {
@@ -217,6 +218,8 @@ int JEU(char matrice[ligne][colonne]) {
     do {
         printf("Quel est votre direction ?\n"
                "z:Haut q:Gauche s:Bas d:Droite e:Fin\n");
+        printf("NIVEAU 1\n");
+        printf("%s",joueur.pseudo);
         do {
             scanf(" %c", &touche);
         } while (!(touche == 'q' || touche == 'z' || touche == 'd' || touche == 's' || touche == 'e'));
@@ -307,3 +310,5 @@ int JEU(char matrice[ligne][colonne]) {
     }while(touche != 'e');
     return 0;
 }
+
+
