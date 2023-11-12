@@ -1,0 +1,55 @@
+#include <stdio.h>
+/*
+   ╭━━━━╮
+╭━┳    ╭━╮━━━━╮
+┃┈┃    ┣▅╋     ┃
+┃┈┃    ╰━╯      ▉
+╰┳╯            ┃
+ ┃      ╭━━━━━━╯
+   ┣━━┫
+╭━┳    ━ ╮
+┃ ┃      ┃
+┃ ┃      ┃
+┃ ┃      ┃
+\|/     /
+/  /━━\  \
+ ━      ━
+*/
+
+int main() {
+    int i, j, n;
+    // facteur de réduction
+    int reduction_factor = 4;
+    // le dessin à réduire
+    float drawing[14] [18]= {
+            {" "," "," ","╭","━","━","━","━","╮"},
+            {"╭","━","┳"," "," "," "," ","╭","━","╮","━","━","━","━","╮"},
+            {"┃","┈","┃"," "," "," "," ","┣","▅","╋"," "," "," "," "," ","┃"},
+            {"┃","┈","┃"," "," "," "," ","╰","━","╯"," "," "," "," "," "," ","▉"},
+            {"╰","┳","╯"," "," "," "," "," "," "," "," "," "," "," "," ","┃"},
+            {" ","┃"," "," "," "," "," "," ","╭","━","━","━","━","━","━","╯"},
+            {" ","┣","━","━","━","━","━","━","┫"},
+            {"╭","━","┳"," "," "," "," "," "," ","━"," ","╮"},
+            {"┃"," ","┃"," "," "," "," "," "," "," "," ","┃"},
+            {"┃"," ","┃"," "," "," "," "," "," "," "," ","┃"},
+            {"┃"," ","┃"," "," "," "," "," "," "," "," ","┃"},
+            {"\","|","/"," "," "," "," "," "," "," ","/"},  
+            {"/"," "," ","/","━","━","\"," "," ","\","},
+                    {""}
+                    
+    };
+/* j'arrive pas à bien afficher snoopy pour l'instant , soit c'est un probleme de caractère 
+ * soit un problème de structuration. Peut etre passer par un char avec des crochets */
+
+int reduced_rows = 14 / reduction_factor;
+int reduced_cols = 18 / reduction_factor;
+
+for (i = 0; i < reduced_rows; i++) {
+for (j = 0; j < reduced_cols; j++) {
+    char symbol = drawing[i * reduction_factor][j * reduction_factor];
+    printf("%c", symbol);
+}
+printf("\n");
+}
+return 0;
+}
