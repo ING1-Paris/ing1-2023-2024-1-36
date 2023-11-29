@@ -1,0 +1,95 @@
+# ing1-2023-2024-1-36
+
+//déplacement de la balle dans le tableau
+// une fois mis dans le github penser à faire la reaction du programme lorsque noopy rencontre la balle.
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define ROWS 10
+#define COLS 20
+
+// Structure de la balle
+struct Ball
+        {
+    int xb;
+    int yb;
+    int dirXb;
+    int dirYb;
+        };
+
+//fonction(initialisation de la balle)
+void initBall(struct Ball *ball)
+        {
+    ball->xb = rand()%(ROWS-2)+1; // spawn à une position aléatoire sur l'axe x
+    ball->yb = rand()%(COLS-2)+1; // spawn à une position aléatoire sur l'axe y
+    ball->dirXb = 1;
+    ball->dirYb = 1;
+        }
+
+// fonction(affichage du tableau avec la balle)
+void displayTable(char table[ROWS][COLS], struct Ball ball)
+        {
+    system("cls");// Efface l'écran
+    for (int i = 0; i < ROWS; i++){
+        for (int j = 0; j < COLS; j++) {
+            if (i == ball.xb && j == ball.yb) {
+                printf("o"); // Affiche la balle à sa position
+            } else {
+                printf("%c", table[i][j]); // Affiche les bordures du tableau
+            }
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    char table[ROWS][COLS];
+    struct Ball ball;
+
+    srand(time(NULL)); // Initialise le générateur de nombres aléatoires
+
+    // Initialisation du tableau avec des bordures
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (i == 0 || i == ROWS-1 || j==0||j == COLS-1) {
+                table[i][j] = '#';
+            } else {
+                table[i][j] = ' ';
+            }
+        }
+    }
+    initBall(&ball); // Initialise la balle
+
+    // Boucle infinie
+    while (1) {
+        displayTable(table, ball); // Affiche le tableau avec la balle
+
+        getchar(); // attente du bouton entrée...
+
+        // Efface la position de la balle dans le tableau
+        table[ball.xb][ball.yb] = ' ';
+
+        // Met à jour la position de la balle avec sa direction
+        int nextXb = ball.xb + ball.dirXb;
+        int nextYb = ball.yb + ball.dirYb;
+
+        // Vérification de la prochaine position atteint les bords et modifie la direction si nécessaire
+        if (nextXb == 0 || nextXb==ROWS-1)
+        {
+            ball.dirXb = -ball.dirXb;
+        }
+        if (nextYb == 0 || nextYb==COLS-1)
+        {
+            ball.dirYb = -ball.dirYb;
+        }
+        // Met à jour la position de la balle
+        ball.xb += ball.dirXb;
+        ball.yb += ball.dirYb;
+
+        //nouvelle position de la balle
+        table[ball.xb][ball.yb] ='b';
+
+    }
+    return 0;
+}
