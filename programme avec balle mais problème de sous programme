@@ -1,0 +1,112 @@
+//sous programme jusqu'à la ligne 52 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define ligne 10
+#define colonne 20
+
+struct Ball
+        {
+    int xb;
+    int yb;
+    int dirXb;
+    int dirYb;
+};
+
+void initBall(struct Ball *ball)
+        {
+    ball->xb = rand() % (ligne - 2) + 1;
+    ball->yb = rand() % (colonne - 2) + 1;
+    ball->dirXb = 1;
+    ball->dirYb = 1;
+}
+
+void updateBallPosition(struct Ball *ball, char table[ligne][colonne])
+        {
+    table[ball->xb][ball->yb] = ' '; // Efface la position
+    int nextXb = ball->xb + ball->dirXb;
+    int nextYb = ball->yb + ball->dirYb;
+    if (nextXb == 0 || nextXb == ligne - 1) {
+        ball->dirXb = -ball->dirXb;
+    }
+    if (nextYb == 0 || nextYb == colonne - 1) {
+        ball->dirYb = -ball->dirYb;
+    }
+
+    ball->xb += ball->dirXb;
+    ball->yb += ball->dirYb;
+
+    table[ball->xb][ball->yb] = 'b'; // Nouvelle position de la balle
+}
+
+void displayTable(char table[ligne][colonne]) {
+    system("cls");
+    for (int h = 0; h < ligne; h++)
+    {
+        for (int k = 0; k < colonne; k++)
+        {
+            printf("%c", table[h][k]);
+        }
+        printf("\n");
+    }
+}
+//fin sous programme
+
+//devut niveau deux modifié mais problème de sous programme !!!
+
+int NIVEAU2(char matrice[ligne][colonne]) {
+    int x=5, y=10;
+    int NBRoiseau = 4;
+    int NBRvie = 3;
+    char noopy = 'S';
+    char oiseau1 = 'O', oiseau2 = 'O', oiseau3 = 'O', oiseau4 = 'O', blocpiege1 = 'P', blocpiege2 = 'P', blocpiege3 = 'P', blocfixe = '#';
+    char balle = 'b';
+    int ball;
+
+    srand(time(NULL));
+    initBall(&ball);
+
+    while (1) {
+        getchar();
+        updateBallPosition(&ball, matrice);
+    }
+
+
+    // Créer la matrice et remplir chaque élément avec un espace
+    for (int i = 0; i < ligne; i++) {
+        for (int j = 0; j < colonne; j++) {
+            matrice[i][j] = ' ';
+        }
+    }
+    int hauteurRectangle = 10;
+    int largeurRectangle = 20;
+    int ligneDebut = 0;
+    int colonneDebut = 0;
+
+    for (int i = ligneDebut; i < ligneDebut + hauteurRectangle; i++) {
+        for (int j = colonneDebut; j < colonneDebut + largeurRectangle; j++) {
+            if (i == ligneDebut || i == ligneDebut + hauteurRectangle - 1 || j == colonneDebut ||
+                j == colonneDebut + largeurRectangle - 1) {
+                matrice[i][j] = 35;  // Remplit uniquement les bords du rectangle
+            }
+        }
+    }
+
+
+    matrice[x][y] = noopy;
+    matrice[1][1] = oiseau1;
+    matrice[1][18] = oiseau2;
+    matrice[8][18] = oiseau3;
+    matrice[8][1] = oiseau4;
+    matrice[4][12] = blocpiege1;
+    matrice[7][3] = blocpiege2;
+    matrice[3][9] = blocpiege3;
+    int ballX = 2;
+    int ballY = 2;
+    matrice[ballX][ballY] = balle;
+    affichage(matrice);
+
+
+    int touche;
+    do {
+    //...
